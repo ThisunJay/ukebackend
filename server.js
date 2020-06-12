@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const passport = require("passport");
 
 const app = express();
 
@@ -45,6 +46,11 @@ mongoose
     console.log(`Could not connect to the database ${err}`);
     process.exit();
   });
+
+// Passport middleware
+app.use(passport.initialize());
+// Passport config
+require("./config/passport")(passport)
 
 const port = process.env.PORT || 5000;
 
